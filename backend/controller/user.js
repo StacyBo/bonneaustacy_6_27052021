@@ -5,6 +5,7 @@ const User = require('../models/User');
 
 // creation d'un utilisateur
 exports.signup = (req, res, next) => {
+    console.log(req)
     bcrypt.hash(req.body.password, 10)
         .then(hash => {
             const user = new User({
@@ -18,7 +19,7 @@ exports.signup = (req, res, next) => {
         .catch(error => res.status(500).json({ error }));
 };
 
-//Connexion d'un utilisateur 
+// connexion d'un utilisateur 
 exports.login = (req, res, next) => {
     User.findOne({ email: req.body.email })
         .then(user => {
