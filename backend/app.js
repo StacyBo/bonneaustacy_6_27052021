@@ -6,8 +6,6 @@ const userRoutes = require('./routes/user');
 
 const path = require("path");
 
-//const Sauce = require('./models/sauces');
-
 // create and configure express app
 const app = express();
 
@@ -32,10 +30,8 @@ mongoose.connect('mongodb+srv://StacyB:HelloYou@cluster0.gxlnh.mongodb.net/myFir
   .catch(() => console.log('Connexion à MongoDB échouée !'));
 
 // Add routes
+app.use('/images', express.static(path.join(__dirname, 'images')));
 app.use('/api/sauces', saucesRoutes);
 app.use('/api/auth', userRoutes);
-
-app.use(express.static(path.join(__dirname, "public")));
-
 
 module.exports = app;
