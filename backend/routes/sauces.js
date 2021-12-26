@@ -11,13 +11,14 @@ router.get('/:id', auth, saucesCtrl.getOneSauce);
 // POST /api/sauces
 router.post('/', auth, multer, saucesCtrl.addSauce);
 
+router.post('/:id/like', auth, saucesCtrl.likeDislikeSauce);
+
+
 // PUT
 router.put('/:id', auth, multer, saucesCtrl.updateSauce);
 
 // DELETE
 router.delete('/:id', auth, saucesCtrl.deleteSauce);
-
-router.post('/:id/like', auth, saucesCtrl.likeDislikeSauce);
 
 
 module.exports = router;

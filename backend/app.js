@@ -6,7 +6,7 @@ const userRoutes = require('./routes/user');
 
 const path = require("path");
 
-// create and configure express app
+// creation et configuration d'express
 const app = express();
 
 // CORS middleware
@@ -17,10 +17,10 @@ app.use((req, res, next) => {
   next();
 });
 
-// Parse the body of the request
+// Analyser le corps de la requete
 app.use(bodyParser.json());
 
-// Connection a la base Data 
+// Connection à la base Data 
 mongoose.connect('mongodb+srv://StacyB:HelloYou@cluster0.gxlnh.mongodb.net/myFirstDatabase?retryWrites=true&w=majority',
   {
     useNewUrlParser: true,
@@ -29,7 +29,7 @@ mongoose.connect('mongodb+srv://StacyB:HelloYou@cluster0.gxlnh.mongodb.net/myFir
   .then(() => console.log('Connexion à MongoDB réussie !'))
   .catch(() => console.log('Connexion à MongoDB échouée !'));
 
-// Add routes
+// ajout des routes
 app.use('/images', express.static(path.join(__dirname, 'images')));
 app.use('/api/sauces', saucesRoutes);
 app.use('/api/auth', userRoutes);
