@@ -20,7 +20,7 @@ app.use((req, res, next) => {
 // Analyser le corps de la requete
 app.use(bodyParser.json());
 
-// Connection à la base Data 
+// Connexion à la base Data 
 mongoose.connect('mongodb+srv://StacyB:HelloYou@cluster0.gxlnh.mongodb.net/myFirstDatabase?retryWrites=true&w=majority',
   {
     useNewUrlParser: true,
