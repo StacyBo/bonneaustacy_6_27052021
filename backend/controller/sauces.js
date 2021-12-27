@@ -21,11 +21,11 @@ exports.addSauce = (req, res, next) => {
 exports.deleteSauce = (req, res, next) => {
     Sauce.findOne({_id: req.params.id})
         .then(sauce => {
-            // 1. Find the filename
+            // 1. Chercher le nom du fichier 
             const filename = sauce.imageUrl.split('/images/')[1];
-            // 2. Delete the image from the server
+            // 2. supprimer l'image du serveur 
             fs.unlink(`images/${filename}`, () => {
-                // 3. Delete the sauce from the database
+                // 3. Supprimer la sauce de la base de données
                 Sauce.deleteOne({_id: req.params.id})
                     .then(() => res.status(200).json({message: "Sauce supprimée"}))
                     .catch((error) => res.status(400).json({error}));
@@ -35,7 +35,7 @@ exports.deleteSauce = (req, res, next) => {
 };
 
 exports.updateSauce = (req, res, next) => {
-    // 1. Create the new "sauce" object
+    // 1. Creer la nouvelle objet "sauce"
     let sauceObject;
     if (req.file) {
         sauceObject = {
@@ -45,7 +45,7 @@ exports.updateSauce = (req, res, next) => {
     } else {
         sauceObject = { ...req.body };
     }
-    // 2. Find the Sauce in database and update it with the new "sauceObject"
+    // 2. Chercher la sauce dans la DB et mettre a jour avec le nouveau "sauceObject"
     Sauce.updateOne({ _id: req.params.id }, { ...sauceObject, _id: req.params.id })
         .then(() => res.status(200).json({ message: 'Sauce modifiée' }))
         .catch(error => res.status(400).json({ error }));
